@@ -1,0 +1,38 @@
+<form class="layui-form layui-form-pane">
+	{volist name="list" id="config"}
+	<div class="layui-form-item" id="layui-input-fix">
+		<label class="layui-form-label">{$config.title}</label>
+		<div class="layui-input-inline" >
+			{switch name="config.type"} {case value="0"}
+			<input type="text" name="config[{$config.name}]" autocomplete="off" placeholder="{$config.remark}" class="layui-input" value="{$config.value}"> {/case} {case value="1"}
+			<input type="text" name="config[{$config.name}]" autocomplete="off" placeholder="{$config.remark}" class="layui-input" value="{$config.value}"> {/case} {case value="2"}
+			<textarea class="layui-textarea" name="config[{$config.name}]">{$config.value}</textarea> {/case} {case value="3"}
+			<textarea class="layui-textarea" name="config[{$config.name}]">{$config.value}</textarea> {/case} {case value="4"}
+			<select name="config[{$config.name}]">
+				{volist name="config['attr']" id="vo"}
+				<option value="{$key}" {if condition="$config.value eq $key" }selected{else /}{/if}>{$vo}</option>
+				{/volist}
+			</select>
+			{/case} {case value="5"}
+			<div class="layui-upload">
+				<button type="button" class="layui-btn f-l" id="test1">{$config.title}</button>
+				<div class="layui-upload-list f-l">
+					<img class="layui-upload-img" id="demo1" style="height: 40px;margin-top:-10px; margin-left: 10px;" {notempty name="$config.value" }src="__ROOT__/{$config.value}" {/notempty}>
+					<p id="demoText"></p>
+					<input type="hidden" name="config[{$config.name}]" id="img" value="{$config.value}" />
+				</div>
+			</div>
+			{/case} {/switch}
+
+		</div>
+		<label id="{$config.remark}" class="tagtip" name="{$config.remark}" style="line-height: 40px;padding: 0 10px;"><i class="layui-icon f-20 text-warning">&#xe60b;</i></label>{$config.name}
+	
+	</div>
+	{/volist}
+	<div class="layui-form-item text-center">
+		<div class="layui-input-block">
+			<a class="layui-btn" lay-submit="" lay-filter="senddata" ajaxurl="{:URL('index/save')}">立即提交</a><button type="reset" class="layui-btn layui-btn-primary">重置</button></div>
+	</div>
+	<p id="tip"></p>
+</form>
+<script src="__JS__/layui/lay/modules/form.js" type="text/javascript" charset="utf-8"></script>

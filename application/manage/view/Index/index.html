@@ -1,0 +1,127 @@
+		<div id="gloBox" class="default">
+			<div id="gloTop" class="clearfix">
+				<div class="gtLeft clearfix">
+					<div class="logo "><img src="__ROOT__/{$adminsite.SITELOGO}" alt="mingyu" /></div>
+					<div class="menuBar">
+						<ul class="list">
+							<li class="bar_line bar_top"></li>
+							<li class="bar_line bar_mid"></li>
+							<li class="bar_line bar_foot"></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="gtRght">
+					<ul class="layui-nav list" lay-filter="">
+						<li class="layui-nav-item circle gohome first">
+							<a class="tooltip" data-tip-text="访问前台" data-tip-type="3" href="__ROOT__" target="_blank"><i class="fa fa-home"></i></a>
+						</li>
+						<li class="layui-nav-item circle">
+							<a class="tooltip javascript" rel="full_screen" data-tip-text="F11全屏" data-tip-type="3" href="javascript:void(0);"><i class="fa fa-arrows "></i></a>
+						</li>
+						<li class="layui-nav-item circle">
+							<a class="tooltip javascript" rel="simple_clear" data-tip-text="清除缓存" data-tip-type="3" ajaxurl="{:url('clearcache')}" lay-submit="" lay-filter="senddata"><i class="fa fa-remove" style="margin: -7px 0 0 -5px;"></i></a>
+						</li>
+						<li class="layui-nav-item circle">
+							<a target="_blank" class="tooltip" data-tip-text="培训手册" data-tip-type="3" href="http://www.sucaihuo.com/"><i class="fa fa-book" style="margin: -7px 0 0 -7px;"></i></a>
+						</li>
+						<li class="layui-nav-item circle skin-down">
+							<a href="javascript:void(0);"><i class="fa fa-yelp" style="margin: -7px 0 0 -6px;"></i></a>
+							<div class="skin-show clearfix">
+								<a data-skin="default" rel="change_skin" style="background: #009688;" class="javascript"></a>
+								<a data-skin="green" rel="change_skin" style="background: rgba(0,166,90,1);" class="javascript"></a>
+								<a data-skin="pink" rel="change_skin" style="background: rgba(250,96,134,1);" class="javascript"></a>
+								<a data-skin="blue" rel="change_skin" style="background: rgba(0,192,239,1);" class="javascript"></a>
+								<a data-skin="red" rel="change_skin" style="background: rgba(250,42,0,1);" class="javascript"></a>
+							</div>
+						</li>
+						<li class="layui-nav-item">
+							<a href="javascript:;" class="admin-user">
+								<span class="admin-user-headpic"><img  src="__ROOT__/{$info.filepath}" alt=""/></span><span class="admin-user-name en-font">{$info.name}</span>
+							</a>
+							<dl class="layui-nav-child">
+								<i class="i"></i>
+								<dd>
+									<a href="{:URL('manage/editPassword')}" class="new_tab" data-icon="fa-user"><i class="fa fa-pencil" aria-hidden="true"></i>修改密码</a>
+								</dd>
+								<dd>
+									<a href="" class="javascript" rel="lockScreen"><i class="fa fa-lock" aria-hidden="true" style="padding-right: 2px;padding-left: 2px;"></i>锁屏(Alt+L)</a>
+								</dd>
+								<dd class="bt">
+									<a data-url="{:url('common/logout')}" class="jump"><i class="fa fa-sign-out" aria-hidden="true"></i>注销登录</a>
+								</dd>
+							</dl>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+			<div id="gloLeft" class="sizing">
+				<div class="leftbg"></div>
+				<div id="leftBar">
+					<ul class="list" id="gloMenu">
+						{volist name="menus" id="data"}
+						<li class="current">
+							<div class="navT">
+								<a href="{$data.url}"><i data-icon="{$data.icon}" class="fa {$data.icon}   animated"></i><cite>{$data.name}</cite></a>
+							</div>
+							{notempty name="$data.list"}
+							<div class="navC">
+								<ul class="list">
+									{volist name="$data.list" id="vo"}
+									<li class="b">
+										<a href="{$vo.url}"><i data-icon="{$data.icon}" class="fa fa-angle-right fa-lg animated"></i><cite>{$vo.name}</cite></a>
+									</li>
+									<li class="s">
+										<a href="{$vo.url}" class="tooltip" data-tip-text="{$vo.name}" data-tip-bg="#009688" data-title="{$vo.name}" data-icon="{$data.icon}"><i class="fa fa-reorder"></i></a>
+									</li>
+									{/volist}
+								</ul>
+							</div>
+							{/notempty}
+						</li>
+						{/volist}
+
+					</ul>
+				</div>
+			</div>
+
+			<div id="gloRght" lay-allowClose="true">
+				<div class="layui-tab admin-nav-card" lay-filter="admin-tab">
+					<div class="topBg coverBg"></div>
+					<div class="tab-bg"></div>
+					<a href="javascript:void(0);" class="tab-prev"><i class="fa fa-angle-double-left fa-2x"></i></a>
+					<a href="javascript:void(0);" class="tab-next"><i class="fa fa-angle-double-right fa-2x"></i></a>
+					<ul class="layui-tab-title">
+						<li class="layui-this">
+							<i class="fa fa-desktop" aria-hidden="true"></i><cite>后台首页</cite>
+						</li>
+					</ul>
+					<div class="layui-tab-content">
+						<div class="layui-tab-item layui-show admin_home">
+							<div class="admin_content">
+								<div class="admin_content_box">
+									<div id="admHome">
+										{include file="index:right"}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="lockScreen">
+			<div class="init">
+				<div class="relative">
+					<div class="lockTime en-font"></div>
+					<div class="pic"><img src="__ROOT__/{$info.filepath}" alt="" />
+						<p class="en-font">sucaihuo_test</p>
+					</div>
+				</div>
+				<div class="wrbox">
+					<input type="password" id="screenPwd" class="wrin" value="" autocomplete="off" placeholder="请输入密码解锁.." /><br /><button id="closeLock" class="layui-btn">立即解锁</button>
+				</div>
+			</div>
+		</div>
+		

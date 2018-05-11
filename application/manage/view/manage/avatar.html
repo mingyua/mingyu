@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="__MANAGE__/css/cropper.css" rel="stylesheet">
+		<link href="__LAYUI__/css/layui.css" rel="stylesheet">
+	</head>
+	<style>
+		img {
+			max-width: 100%;
+		}
+		
+		.prev {
+			display: block;
+			margin-bottom: 10px;
+			box-shadow: 0 2px 4px #ccc;
+		}
+	</style>
+
+	<body>
+
+		<div class="layui-row layui-container" style="margin-top: 30px;">
+			<div class="layui-col-sm6">
+
+				<div class="containers">
+					<img id="image" src="__IMAGE__/avatar.jpg">
+				</div>
+			</div>
+			<div class="layui-col-sm6">
+				<div class="prev" style="width: 150px; height: 150px; overflow: hidden"></div>
+				<div class="prev" style="width: 100px; height: 100px; overflow: hidden"></div>
+				<div class="prev" style="width: 80px; height: 80px; overflow: hidden"></div>
+
+			</div>
+			<div class="layui-col-sm6" style="text-align: center;margin-top: 10px;">
+
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<div style="width: 0;height:0;overflow: hidden;"><input type="file" name="file" id="avatarInput" value="" /></div>
+						<button class="layui-btn layui-btn-danger" id="selectpic">选择图片</button>
+						<button class="layui-btn pull-right" id="getCanvas">上传头像</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<script src="__MANAGE__/js/jquery.min.js"></script>
+		<script src="__MANAGE__/js/cropper.min.js"></script>
+		<script src="__LAYUI__/layui.js"></script>
+		<script>
+			layui.use(['element', 'upload', 'layer', 'form'], function() {
+				var $ = layui.jquery,
+					element = layui.element,
+					upload = layui.upload,
+					layer = layui.layer,
+					form = layui.form;
+
+			});
+			$(function() {
+				var image = document.getElementById("image");
+				var inputImage = document.getElementById('avatarInput');
+				var URL;
+				//可以通过$().cropper(options)方法来设置参数。如果想改变全局默认参数，可以使用$.fn.cropper.setDefaults(options)方法。
+				var options = {
+					aspectRatio: 1 / 1, //宽高比
+					preview: '.prev', //预览窗口
+					guides: true, //裁剪框的虚线
+					autoCropArea: 0.8, //0-1之间的数值，定义自动剪裁区域的大小，默认0.8
+					dragCrop: true, //是否允许移除当前的剪裁框，并通过拖动来新建一个剪裁框区域
+					movable: true, //是否允许移动剪裁框
+					resizable: true, //是否允许改变裁剪框的大小
+					zoomable: true, //是否允许缩放图片大小
+					mouseWheelZoom: true, //是否允许通过鼠标滚轮来缩放图片
+					touchDragZoom: true, //是否允许通过触摸移动来缩放图片
+					rotatable: true, //是否允许旋转图片
+					minContainerWidth: 300, //容器的最小宽度
+					minContainerHeight: 300, //容器的最小高度
+					minCanvasWidth: 0, //canvas 的最小宽度（image wrapper）
+					minCanvasHeight: 0, //canvas 的最小高度（image wrapper）
+					strict: true,
+					crop: function(e) { //当改变剪裁容器或图片时的事件函数
+						console.log(e.detail.x);
+						console.log(e.detail.y);
+						console.log(e.detail.width);
+						console.log(e.detail.height);
+						console.log(e.detail.rotate);
+						console.log(e.detail.scaleX);
+						console.log(e.detail.scaleY);
+					},
+					build: function() {
+						console.log('build');
+					},
+					built: function() {
+						console.log('built');
+					},
+					cropstart: function(e) {
+						console.log('cropstart', e.detail.action);
+					},
+					cropmove: function(e) {
+						console.log('cropmove', e.detail.action);
+					},
+					cropend: function(e) {
+						console.log('cropend', e.detail.action);
+					},
+				};
+				var cropper = new Cropper(image, options);
+				var originalImageURL = image.src;
+				var uploadedImageType = 'image/jpeg';
+				var uploadedImageURL;
+
+				$("#btnCrop").on("click", function() {
+					cropper.setDragMode("crop");
+				});
+
+				$("#btnMove").on("click", function() {
+					cropper.setDragMode("move");
+				});
+				$('#selectpic').click(function() {
+					$('#avatarInput').click();
+				});
+				$("#getCanvas").on("click", function() {
+					var $imgData = cropper.getCroppedCanvas();
+					var dataurl = $imgData.toDataURL('image/png');
+
+					$.ajax({
+						url: "{:URL('manage/avatar')}",
+						type: 'post',
+						data: {
+							dataurl: dataurl
+						},
+						success: function(res) {
+							layer.msg(res.msg, {
+								icon: res.result
+							});
+						},
+						error: function(e) {
+							alert('0000');
+						}
+
+					});
+				});
+
+				var URL = window.URL || window.webkitURL;
+				var blobURL;
+
+				if(URL) {
+					inputImage.onchange = function() {
+						var files = this.files;
+						var file;
+
+						if(cropper && files && files.length) {
+							file = files[0];
+
+							if(/^image\/\w+/.test(file.type)) {
+								blobURL = URL.createObjectURL(file);
+								cropper.reset().replace(blobURL);
+							} else {
+								window.alert('Please choose an image file.');
+							}
+						}
+						$(inputImage).find("img").hide();
+					};
+				} else {
+					inputImage.disabled = true;
+					inputImage.parentNode.className += ' disabled';
+				}
+
+			});
+		</script>
+	</body>
+
+</html>

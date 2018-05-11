@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html>
+	<head lang="en">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="keywords" content="{$seokeywords}" />
+		<meta name="description" content="{$seodescription}" />
+		<title>{$seotitle}</title>
+		<link href="__THEMES__/css/animate.min.css" rel="stylesheet" type="text/css">
+		<link href="__LAYUI__/css/layui.css" rel="stylesheet" type="text/css">
+		<link href="__THEMES__/css/bootstrap.css" rel="stylesheet" type="text/css">
+		<link href="__THEMES__/css/style.css" rel="stylesheet" type="text/css">
+		<link href="__THEMES__/css/css.css" rel="stylesheet" type="text/css">
+		<link href="__THEMES__/css/main.css" rel="stylesheet" type="text/css" />
+		<link href="__THEMES__/css/ggys.css" rel="stylesheet" type="text/css">
+		<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+		<!--[if lt IE 9]><script src="__THEMES__/js/ie8-responsive-file-warning?v=20135313.js"></script><![endif]-->
+		<script src="__LAYUI__/layui.js"></script>
+		<script src="__THEMES__/js/ie-emulation-modes-warning.js?v=20135324"></script>
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]><a href="images">images</a>
+<script src="__THEMES__/html5shiv/3.7.2/html5shiv.min.js?v=20135313"></script>
+<script src="__THEMES__/respond/1.4.2/respond.min.js?v=20135313"></script>
+<![endif]-->
+
+		<script src="__THEMES__/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+
+		<style>
+			#pageloading {
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				background: #FFF;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<!-- 头部 -->
+		<header style="height:70px; overflow:hidden;">
+			<div class="box">
+				<div class="container">
+					<div class="logo" id="tagtip">
+						<a href="/"><img src="__ROOT__{$site.SITELOGO}" /></a>
+					</div>
+					<div class="pc_nav">
+						<ul>
+							<li>
+								<a href="/">网站首<span></span>页</a>
+							</li>
+							{volist name="nav" id="v"}
+							<li class="l1">
+								<a href="__ROOT__/{$v.catdir}.html">{$v.catname}<span></span></a>
+								{notempty name="$v.childarr"}
+								<div class="dnou">
+									{volist name="v.childarr" id="vo"}
+									<a href="__ROOT__/{$vo.catdir}-{$vo.id}.html">
+										{$vo.catname}</a>
+									{/volist}
+								</div>
+								{/notempty}
+							</li>
+							{/volist}
+
+						</ul>
+						<div class="bnie">
+							<a onClick="_toggle('m1')"><img src="__THEMES__/images/tu.jpg" /></a>
+						</div>
+					</div>
+					<div class="niens" id="m1" style=" display:none;">
+						<input type="text" class="wbk" value="请输入您要搜索的关键词">
+					</div>
+					<div class="sj_nav">
+						<div class="mobile">
+							<div class="mobile-inner">
+								<div class="mobile-inner-header">
+									<div class="mobile-inner-header-icon mobile-inner-header-icon-out"></div>
+								</div>
+							</div>
+						</div>
+						<div class="mobile-inner-nav">
+							<div class="containe">
+								<div class="menuTitle4">
+									<a href="/">网站首页</a>
+								</div>
+								<div class="menuTitle3">关于我们</div>
+								<div class="menuContent3">
+									<div>
+										<li>
+											<a href="/Home/Article/index/category/40/id/41.html">
+												公司介绍</a>
+										</li>
+										<li>
+											<a href="/Home/Article/index/category/40/id/47.html">
+												领导致辞</a>
+										</li>
+										<li>
+											<a href="/Home/Article/index/category/40/id/48.html">
+												组织架构</a>
+										</li>
+										<li>
+											<a href="/Home/Article/index/category/40/id/49.html">
+												企业文化</a>
+										</li>
+										<li>
+											<a href="/Home/Article/index/category/40/id/50.html">
+												发展历程</a>
+										</li>
+									</div>
+								</div>
+								<div class="menuTitle3">新闻中心</div>
+								<div class="menuContent3">
+									<div>
+										<li>
+											<a href="/Home/Article/lists/category/42/id/51.html"> 公司新闻</a>
+										</li>
+										<li>
+											<a href="/Home/Article/lists/category/42/id/52.html"> 集团新闻</a>
+										</li>
+										<li>
+											<a href="/Home/Article/lists/category/42/id/53.html"> 行业新闻</a>
+										</li>
+										<li>
+											<a href="/Home/Article/lists/category/42/id/54.html"> 其他新闻</a>
+										</li>
+									</div>
+								</div>
+								<div class="menuTitle3">主营业务</div>
+								<div class="menuContent3">
+									<div>
+										<li>
+											<a href="/Home/Article/lists/category/43/id/55.html"> 文创功能区开发建设</a>
+										</li>
+										<li>
+											<a href="/Home/Article/lists/category/43/id/56.html"> 产业投资</a>
+										</li>
+										<li>
+											<a href="/Home/Article/lists/category/43/id/57.html"> 资产运营</a>
+										</li>
+									</div>
+								</div>
+								<div class="menuTitle3">采购平台</div>
+								<div class="menuContent3">
+									<div>
+										<li>
+											<a href="/Home/Article/lists/category/44/id/58.html"> 招标公告</a>
+										</li>
+										<li>
+											<a href="/Home/Article/lists/category/44/id/68.html"> 中标公告</a>
+										</li>
+										<li>
+											<a href="/Home/Article/lists/category/44/id/69.html"> 监督举报</a>
+										</li>
+									</div>
+								</div>
+								<div class="menuTitle3">党群工作</div>
+								<div class="menuContent3">
+									<div>
+										<li>
+											<a href="/Home/Article/lists/category/45/id/60.html"> 党建工作</a>
+										</li>
+										<li>
+											<a href="/Home/Article/lists/category/45/id/61.html"> 职工之家</a>
+										</li>
+									</div>
+								</div>
+								<div class="menuTitle3">加入我们</div>
+								<div class="menuContent3">
+									<div>
+										<li>
+											<a href="/Home/Article/index/category/46/id/62.html">
+												人才理念</a>
+										</li>
+										<li>
+											<a href="/Home/Article/index/category/46/id/63.html">
+												工作机会</a>
+										</li>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- /头部 -->
+
+		<!-- 主体 -->

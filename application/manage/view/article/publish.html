@@ -1,0 +1,201 @@
+<link rel="stylesheet" type="text/css" href="__ADMIN__/color/spectrum.css">
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>{$title}</h5>
+
+					<div class="ibox-tools">
+						<a class="collapse-link">
+							<i class="fa fa-chevron-up"></i>
+						</a>
+
+						<a class="close-link">
+							<i class="fa fa-times"></i>
+						</a>
+					</div>
+				</div>
+				<div class="ibox-content">
+					<form class="layui-form layui-form-pane" id="admin">
+						<div class="layui-row">
+							<div class="layui-col-sm6">
+								{empty name="$cate"}
+									<input type="hidden" name="catid" id="catid" value="{$info.id}" />
+								{else/}
+								
+								<div class="layui-form-item">
+									<label class="layui-form-label">栏目</label>
+									<div class="layui-input-block">
+										<select name="catid">
+											<option value="">请选择</option>
+										        {volist name="cate" id="vo"}
+										        <option value="{$vo.id}" {eq name="$vo.id" value="$article.catid"}selected {/eq}{eq name="$vo.child" value="1"}disabled{/eq}>{$vo.str}{$vo.catname} </option>
+										        {/volist}
+											
+										</select>
+									</div>
+								</div>								
+								{/empty}
+								<div class="layui-form-item">
+									<label class="layui-form-label">标题</label>
+									<div class="layui-input-block">
+										<input name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input" type="text" {empty name="$article.title" }value="{$info.catname}"{else/}value="{$article.title}" {/empty}>
+									</div>
+								</div>
+
+								<div class="layui-form-item">
+									<label class="layui-form-label">标题颜色</label>
+									<div class="layui-input-inline" style="padding: 4px 0 0 10px;">
+											<input type="text" name="style_color" id="style_color" value="{:strbetween($article.title_style,'r:',';f')}" />
+									</div>
+									
+									<div class="layui-input-inline">
+										<input type="checkbox" name="style_bold" value="bold" {eq name=":strbetween($article.title_style,'t:',';')" value="bold"}checked{/eq}  title="加粗">
+									</div>
+
+								</div>
+								<div class="layui-form-item">
+									<label class="layui-form-label">缩略图</label>
+									<div class="layui-upload">
+										<button type="button" class="layui-btn" id="test1">图片上传</button>
+										<div class="layui-upload-list">
+											<img class="layui-upload-img" id="demo1" height='100' {notempty name="$article.thumb" }src="{$article.thumb}" {/notempty}>
+											<p id="demoText"></p>
+											<input type="hidden" name="thumb" id="img" {notempty name="$article.thumb" }value="{$article.thumb}" {/notempty} />
+										</div>
+									</div>
+								</div>
+								<div class="layui-form-item">
+									<label class="layui-form-label">关键词</label>
+									<div class="layui-input-block">
+										<input name="keywords" autocomplete="off" placeholder="关键词之间用,隔开" class="layui-input" type="text" {notempty name="$article.keywords" }value="{$article.keywords}" {/notempty}>
+									</div>
+								</div>								
+								<div class="layui-form-item layui-form-text">
+									<label class="layui-form-label">SEO简介</label>
+									<div class="layui-input-block">
+										<textarea placeholder="请输入简介" class="layui-textarea" name="description">{notempty name="$article.description"}{$article.description}{/notempty}</textarea>
+									</div>
+								</div>
+
+								<div class="layui-form-item layui-form-text">
+									<label class="layui-form-label">内容</label>
+									<div class="layui-input-block" >									 
+										<textarea placeholder="请输入内容" class="layui-textarea " name="content" style="border: 0;padding-left: 0px;"  id="container">{notempty name="$article.content"}{$article.content}{/notempty}</textarea>
+									</div>
+								</div>
+								<div class="layui-form-item">
+									<label class="layui-form-label">发布时间</label>
+									<div class="layui-input-block">
+										<input type="text" class="layui-input" id="createtime" placeholder="创建时间" name="addtime" {empty name="$article.updatetime" }value="{$article.createtime|toDate}"{else/}value="{$article.updatetime|toDate}" {/empty}>
+									</div>
+								</div>								
+								{neq  name="$model" value="page"}
+								<div class="layui-form-item">
+									<label class="layui-form-label">状态</label>
+									<div class="layui-input-block">
+										<input type="radio" name="status" {eq name="$article.status" value="1"}checked{/eq} value="1" title="发布" >
+									    <input type="radio" name="status" {eq name="$article.status" value="0"}checked{/eq} value="0" title="待发布">
+									</div>
+								</div>								
+
+								<div class="layui-form-item">
+									<label class="layui-form-label">来源</label>
+									<div class="layui-input-block">
+										<input name="copyfrom" autocomplete="off" placeholder="Mingyu" class="layui-input" type="text" {notempty name="$article.copyfrom" }value="{$article.copyfrom}" {/notempty}>
+									</div>
+								</div>								
+
+								<div class="layui-form-item">
+									<label class="layui-form-label">来源网址</label>
+									<div class="layui-input-block">
+										<input name="fromlink" autocomplete="off" placeholder="http://" class="layui-input" type="text" {notempty name="$article.fromlink" }value="{$article.fromlink}" {/notempty}>
+									</div>
+								</div>								
+
+								<div class="layui-form-item">
+									<label class="layui-form-label">点击次数</label>
+									<div class="layui-input-block">
+										<input name="hits" autocomplete="off" placeholder="0" class="layui-input" type="text" {notempty name="$article.hits" }value="{$article.hits}" {/notempty}>
+									</div>
+								</div>								
+
+								<div class="layui-form-item">
+									<label class="layui-form-label">推荐位</label>
+									<div class="layui-input-block">
+										<select name="posid">
+											<option value="">请选择</option>											
+											<option value="1" {eq name="$article.posid" value="1"}selected{/eq}>首页推荐</option>
+											<option value="2" {eq name="$article.posid" value="2"}selected{/eq}>当前分类推荐</option>
+										</select>
+
+									</div>
+								</div>								
+								{/neq}
+								<div class="layui-form-item">
+									<label class="layui-form-label">模板</label>
+									<div class="layui-input-block">
+										<select name="template">
+											<option value="">请选择</option>
+											{volist name="templates" id="v"}
+											<option value="{$v.value}" {eq name="$article.template" value="$v.value"}selected{/eq}>{$v.filename}</option>
+											{/volist}
+										</select>
+
+									</div>
+								</div>								
+
+								<input type="hidden" name="model" value="{$model}" />
+								{notempty name="$article"}<input type="hidden" name="id" value="{$article.id}"> {/notempty}
+								<div class="layui-form-item">
+									<div class="layui-input-block">
+										<a class="layui-btn" lay-submit lay-filter="senddata" ajaxurl="{:URL('article/{$model}')}">立即提交</a>
+										<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+									</div>
+								</div>
+
+							</div>
+							<div class="layui-col-sm6">
+
+							</div>
+						</div>
+
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+    <script type="text/javascript" charset="utf-8" src="__STATIC__/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="__STATIC__/ueditor/ueditor.all.min.js"> </script>
+
+<script type="text/javascript" src="__ADMIN__/color/spectrum.js"></script>
+<script type='text/javascript' src='__ADMIN__/color/docs.js'></script>
+<script type="text/javascript">
+	window.UEDITOR_HOME_URL = '/Ueditor/';
+	window.onload = function() {
+		UE.getEditor('container', {
+			initialFrameHeight: 200
+		});
+	}
+	
+
+	
+	
+layui.use(['laydate','form'], function(){
+  var laydate = layui.laydate,
+  	  form = layui.form;
+   
+
+ 
+  //执行一个laydate实例
+  laydate.render({
+    elem: '#createtime', //指定元素
+    type:'datetime',
+    format:'yyyy-MM-dd HH:mm:ss'
+
+  });
+});
+</script>

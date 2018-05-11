@@ -1,0 +1,23 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row">
+		<div class="col-sm-12">
+			<div id="tip"></div>
+			<form class="layui-form layui-form-pane">
+				
+				{volist name="html" id="v"}
+					{$v._html}
+				{/volist}
+				{notempty name="$info"}
+				<input type="hidden" name="id" id="id" value="{$info.id}" />
+				{/notempty}
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<button type="button" class="layui-btn" ajaxurl="{:URL('ad/add')}" lay-submit lay-filter="senddata">{:lang('submit')}</button>
+						<a href="{:url('index')}" class="layui-btn layui-btn-primary">{:lang('back')}</a>
+					</div>
+				</div>
+				
+			</form>
+		</div>
+	</div>
+</div>

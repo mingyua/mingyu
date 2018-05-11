@@ -1,0 +1,156 @@
+<div class="admin-main fadeInUp animated">
+	<div class="layui-field-box">
+		<div>
+			<blockquote class="layui-elem-quote">
+				<button class="layui-btn">{$title}</button>
+				<a data-url="{:url('module/addfield',array('moduleid'=>$id,'tables'=>$table))}" data-title="{:lang('add')}{:lang('field')}" class="layui-btn additem fr">{:lang('add')}{:lang('field')}</a>
+
+			</blockquote>
+
+			<form class="layui-form layui-form-pane">
+				<table class="layui-table">
+					<thead>
+						<th>字段名</th>
+						<th>别名</th>
+						<th>字段类型</th>
+						<th>表单类型</th>
+						<th>验证规则</th>
+						<th>必填</th>
+						<th>排序</th>
+						<th></th>
+					</thead>
+					<tbody>
+						{volist name="data" id="v"}
+						<tr id="cc{$v.id}">
+							<td>{$v.field}</td>
+							<td>{$v.name}</td>
+							<td>{$v.setup.fieldtype|default=""}</td>
+							<td>{$v.type}</td>
+							<td>{$v.pattern}</td>
+							<td>{$v.required}</td>
+							<td><input class="listorder" data-id="{$v.id}" type="text" value="{$v.listorder}" /></td>
+							<td>
+								<a class="layui-btn layui-btn-sm layui-bg-red" href="{:URL('module/addfield',array('moduleid'=>$id,'id'=>$v.id,'tables'=>$table))}">修改</a>
+								<button class="layui-btn layui-btn-sm layui-bg-red" ajaxurl="{:URL('module/delfield')}" id="{$v.id}" sys="{$v.issystem}" field="{$v.field}" lay-submit lay-filter="delete">删除</button>
+							</td>
+						</tr>
+						{/volist}
+					</tbody>
+				</table>
+			</form>
+			<p id="tip"></p>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	layui.use(['form', 'layedit', 'laydate'], function() {
+		var form = layui.form,
+			layer = layui.layer,
+			layedit = layui.layedit,
+			laydate = layui.laydate;
+
+		//监听提交
+		form.on('submit(demo1)', function(data) {
+			$.ajax({
+				type: "post",
+				url: "{:URL('module/addfield')}",
+				data: data.field,
+				success: function(result) {
+					//document.getElementById('tip').innerHTML=result;
+					layer.msg(result.msg, {
+						icon: result.result
+					});
+				},
+				error: function(result) {
+					layer.msg('网络异常！', {
+						icon: 2
+					});
+				}
+			});
+
+			return false;
+		});
+
+		form.on('submit(delete)', function(result) {
+			var _this = this;
+			var id = _this.getAttribute('id'),
+				sys = _this.getAttribute('sys'),
+				urls = _this.getAttribute('ajaxurl'),
+				name = "{$table}",
+				field = _this.getAttribute('field');
+			layer.confirm('您确定要删除吗？', {
+				icon: 0
+			}, function(index) {
+				$.ajax({
+					type: "post",
+					url: urls,
+					data: {
+						id: id,
+						sys: sys,
+						tablename: name,
+						field: field
+					},
+					success: function(result) {
+						if(result.result == 1) {
+							_this.parentNode.parentNode.remove();
+						}
+						layer.msg(result.msg, {
+							icon: result.result
+						});
+					},
+					error: function(result) {
+						layer.msg('网络异常！', {
+							icon: 2
+						});
+					}
+				});
+			});
+			return false;
+		});
+
+		$('body').on('blur', '.listorder', function() {
+
+			var id = $(this).attr('data-id');
+			var listorder = $(this).val();
+
+			var urls = "{:URL('module/order')}";
+			var name = "{$table}";
+
+			var loading = layer.load(1, {
+				shade: [0.1, '#fff']
+			});
+			$.ajax({
+				type: "post",
+				url: urls,
+				data: {
+					id: id,
+					listorder: listorder,
+					tablename: name
+				},
+				success: function(result) {
+					layer.close(loading);
+					//document.getElementById('tip').innerHTML=result;
+					//return;
+					if(result.status == 1) {
+						layer.msg(result.msg, {
+							icon: result.result
+						});
+					} else {
+						layer.msg(result.msg, {
+							icon: result.result
+						});
+					}
+
+				},
+				error: function(result) {
+					layer.msg('网络异常！', {
+						icon: 2
+					});
+				}
+			});
+		});
+
+	});
+</script>

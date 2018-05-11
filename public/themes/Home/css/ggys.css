@@ -1,0 +1,21 @@
+html, body { position: relative;
+        height: 100%;}
+body{padding:0px ;margin:0; font-family:"Microsoft YaHei";font-size:12px; background:#fff; position:relative; overflow-x:hidden;}
+a,p,dl,dt,dd,ul,li,h2,h1,h3,h4,h5,h6,table,tr,td,form,iframe,font,em,i{ font-size:12px; font-weight:normal;word-break: normal;word-wrap: break-word;  font-style:normal; padding:0px ;margin:0;text-decoration:none;outline:none;-moz-outline:none; }
+a:focus{outline-style:none; -moz-outline-style: none;}
+a:hover{ text-decoration:none;}
+p{word-break: normal;word-wrap: break-word; }
+img{ border:none; max-width:100%;}
+li{ list-style:none; text-decoration:none;}
+input {outline: none;text-decoration:none;-ms-outline:none; }
+textarea {outline: none;text-decoration:none;}
+select{outline: none;text-decoration:none;}
+/*input:focus{ border:1px solid #9c9f58;}*/
+.clearfix:after {visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
+.clearfix {zoom:1;}	
+a{text-decoration:none;}
+a:hover{ color:#812238;}
+a:hover,a:focus,a:link,a:visited,a:active { text-decoration: none;}
+@media(max-width:1024px){
+html, body {height: auto;}
+}

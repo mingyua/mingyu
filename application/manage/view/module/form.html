@@ -1,0 +1,50 @@
+<div class="admin-main fadeInUp animated">
+	<div class="layui-field-box">
+		<div>
+			<form class="layui-form layui-form-pane">
+				<div class="layui-form-item">
+					<label class="layui-form-label">{:lang('module')}{:lang('name')}</label>
+					<div class="layui-input-block">
+						<input type="text" name="title" value="{$info.title|default=''}" lay-verify="required" placeholder="必填：模型名称" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">{:lang('table')}</label>
+					<div class="layui-input-block">
+						<input type="text" name="name" value="{$info.name|default=''}" placeholder="必填：模型表名" lay-verify="required" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">列表页字段</label>
+					<div class="layui-input-block">
+						<input type="text" name="listfields" value="{$info.listfields|default=''}" placeholder="{:lang('pleaseEnter')}列表页调用字段" class="layui-input">
+					</div>
+				</div>
+
+				<div class="layui-form-item layui-form-text">
+					<label class="layui-form-label">{:lang('detail')}</label>
+					<div class="layui-input-block">
+						<textarea name="description" placeholder="{:lang('pleaseEnter')}内容" class="layui-textarea">{$info.description|default=''}</textarea>
+					</div>
+				</div>
+
+				{if condition="$info eq 'null'"}
+				<div class="layui-form-item">
+					<label class="layui-form-label">新建表字段</label>
+					<div class="layui-input-block">
+						<input type="radio" name="type" value="1" checked title="空表字段">
+						<input type="radio" name="type" value="0" title="普通表字段">
+					</div>
+				</div>
+				{else/}
+				<input type="hidden" name="id" value="{$info.id}" /> {/if}
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<button type="button" class="layui-btn" ajaxurl="{:URL('module/add')}" lay-submit lay-filter="senddata">{:lang('submit')}</button>
+						<a href="{:url('index')}" class="layui-btn layui-btn-primary">{:lang('back')}</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

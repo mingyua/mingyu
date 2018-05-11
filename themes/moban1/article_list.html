@@ -1,0 +1,45 @@
+{include file="common/head"/}
+
+      <!--banner begin-->
+<div class="gyw_bd"><img src="__ROOT__{$banner}" />
+  <div class="gyw_bd1" style="color:#333;">
+    <div class="container">{$cattitle.catname}<i style="color:#999;">{$cattitle.title}</i></div>
+  </div>
+</div>
+<!--banner end--> 
+
+<!--main begin-->
+<div class="xw_box">
+  <div class="container">
+    <div class="xw_bot{$class}">
+      <ul>
+      	{clt:list db="category" where="parentid=$pid" id="v" order="listorder ASC" limit="4"}
+        <li><a href="__ROOT__/{$v.catdir}-{$v.id}.html" {eq name="$v.id" value="$catid"}class="bor"{/eq}>{$v.catname}</a></li>
+        {/clt:list}
+      </ul>
+    </div>
+  </div>
+  {volist name="list" id="v"}
+  <div class="xw_box1">  	
+    <div class="container">
+      <ul>
+        <li><span>{$v.addtime,'d'|toDate}<i>{$v.addtime,'m'|toDate|numberwords}月</i></span>
+          <font>
+            <h1><a href="__ROOT__/{$v.catid,'catdir'|catname}-{$v.catid}-{$v.id}.html">{$v.title}</a></h1>
+            <p><em>{$v.keywords}</em>
+            <a href="__ROOT__/{$v.catid,'catdir'|catname}/{$v.catid}-{$v.id}.html">查看详情 →</a></p>
+          </font>
+        </li>
+      </ul>
+    </div>
+  </div>
+  {/volist}
+<div class="xw_box1">
+<div class="container">
+
+			{$list->render('1','#E21F30',1)}
+
+  </div>
+</div>
+<!--main end-->  
+{include file="common/footer"/}

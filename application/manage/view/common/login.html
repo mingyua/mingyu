@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+		<title>Mingyu后台登录</title>
+		<meta name="keywords" content="Mingyu后台">
+		<meta name="description" content="Mingyu后台">
+		<link rel="stylesheet" href="__LAYUI__/css/layui.css" media="all">
+		<link href="__MANAGE__/css/style.min.css" rel="stylesheet">
+		<link href="__MANAGE__/css/login.min.css" rel="stylesheet">
+		<script>
+			if(window.top !== window.self) {
+				window.top.location = window.location
+			};
+		</script>
+
+	</head>
+
+	<body class="signin">
+		<div class="signinpanel">
+			<div class="layui-row">
+				<div class="layui-col-sm6">
+					<div class="signin-info">
+						<div class="logopanel m-b">
+							<h1>[ Mingyu ]</h1>
+						</div>
+						<div class="m-b"></div>
+						<h4>欢迎使用 <strong>Mingyu 后台主题UI框架</strong></h4>
+						<ul class="m-b">
+							<li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势一</li>
+							<li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势二</li>
+							<li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势三</li>
+							<li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势四</li>
+							<li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势五</li>
+						</ul>
+						<strong>还没有账号？
+                    <a href="#">立即注册&raquo;</a>
+                </strong>
+					</div>
+				</div>
+				<div class="layui-col-sm6">
+					<form class="layui-form layui-form-pane" id="login">
+						<div class="layui-form-item">
+							<input type="text" name="name" lay-verify="" autocomplete="off" placeholder="用户名" class="layui-input" {notempty name="usermember" }value="{$usermember}" {/notempty} class="layui-input" value="admin">
+						</div>
+						<div class="layui-form-item">
+							<input type="password" name="password" lay-verify="" autocomplete="off" placeholder="密码" class="layui-input" value="tplay">
+						</div>
+						<div class="layui-form-item">
+							<div class="layui-input-inline">
+								<input type="text" name="captcha" lay-verify="" placeholder="验证码" autocomplete="off" class="layui-input">
+							</div><img src="{:captcha_src()}" alt="captcha" class="pull-left" onclick="this.src='{:captcha_src()}?seed='+Math.random()" width="100" height="37" id="captcha" />
+						</div>
+						<div class="layui-form-item " style="text-align: right;">
+							<div class="kit-pull-left kit-login-remember ">
+								<input type="checkbox" value="1" lay-skin="" title="记住帐号?" name="remember" {notempty name="usermember" }checked="" {/notempty}>
+							</div>
+						</div>
+						<div class="layui-form-item" style="text-align: center;">
+
+							<button class="layui-btn " lay-submit lay-filter="login">立即提交</button>
+							<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="signup-footer">
+				<div class="pull-left">
+					&copy; 2015 All Rights Reserved. Mingyu
+				</div>
+			</div>
+
+		</div>
+		<video src='__MANAGE__/video/banner11.mp4' loop autoplay class='pf_videos' style="width:100%;"></video>
+	</body>
+	<script src="__LAYUI__/layui.js"></script>
+	<script>
+		layui.use(['layer', 'form'], function() {
+			var layer = layui.layer,
+				$ = layui.jquery,
+				form = layui.form;
+			form.on('submit(login)', function(data) {
+				$.ajax({
+					url: "{:url('common/login')}",
+					data: $('#login').serialize(),
+					type: 'post',
+					success: function(res) {
+						layer.msg(res.msg, {
+							offset: '100px',
+							anim: 5
+						});
+						if(res.code == 1) {
+							setTimeout(function() {
+								location.href = res.url;
+							}, 1500);
+						} else {
+							$('#captcha').click();
+						}
+					},
+					error: function() {
+						layer.msg('网络错误');
+					}
+				})
+				return false;
+			});
+		});
+	</script>
+
+</html>

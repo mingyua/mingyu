@@ -1,0 +1,82 @@
+<div class="admin-main fadeInUp animated">
+	<div class="layui-field-box">
+		<div>
+
+			<blockquote class="layui-elem-quote">
+				<button class="layui-btn">{$title}</button>
+				<a data-url="{:url('add')}" data-title="{:lang('add')}栏目" class="layui-btn additem fr">{:lang('add')}栏目</a>
+			</blockquote>
+			<table class="layui-table">
+				<thead>
+					<tr>
+						<th width="60">编号</th>
+						<th>栏目名称<span id="cateNameMsg">(点击查看内容)</span></th>
+						<th>所属模型</th>
+						<th width="60">导航</th>
+						<th width="60">{:lang('order')}</th>
+						<th width="320">操作</th>
+					</tr>
+				</thead>
+				<tbody id="con">
+					{volist name="categorys" id="v"}
+					<tr>
+						<td>{$v.id}</td>
+						<td>
+							<a href="__ROOT__/manage/{$v.module}/{eq name='$v.module' value="page"}add{else/}index{/eq}/catid/{$v.id}" class="green font-bold">{$v.html}{$v.catname}</a>
+						</td>
+						<td>{$v.moduleid,'title'|getmdname}</td>
+						<td class="layui-form"><input type="checkbox" ajaxurl="{:URL('category/status')}" name="switch" value="{$v.id}" lay-skin="switch" lay-text="显示|关闭" lay-filter="status" {eq name="$v.ismenu" value="1" }checked{/eq}></div>
+		</td>
+		<td><input type="text" name="listorder" data-id="{$v.id}" class="list_order layui-input" value="{$v.listorder}" /></td>
+		<td>
+			{eq name='$v.module' value="page"}
+			<button data-url="__ROOT__/manage/{$v.module}/add/catid/{$v.id}" class="layui-btn layui-btn-sm layui-btn-primary additem" data-title="修改内容">修改内容</button> {else/}
+			<button data-url="__ROOT__/manage/{$v.module}/index/catid/{$v.id}" class="layui-btn layui-btn-sm layui-btn-primary additem" data-title="查看列表">查看列表</button> {/eq}
+
+			<button data-url="{:URL('edit',array('id'=>$v.id))}" class="layui-btn layui-btn-sm layui-bg-cyan additem" data-title="编辑栏目">编辑</button>
+			<button data-url="{:URL('category/add', array('parentid' => $v['id']))}" class="layui-btn layui-btn-sm layui-bg-green additem" data-title="添加子栏目">添加子栏目</button>
+			<button data-url="{:URL('category/del')}" id="{$v.id}" class="layui-btn layui-btn-sm layui-btn-danger deleteitem">删除</button>
+
+		</td>
+		</tr>
+		{/volist}
+		</tbody>
+		<tfoot>
+			</table>
+	</div>
+</div>
+
+
+<script src="__STATIC__/common/js/jquery.2.1.1.min.js"></script>
+<script>
+	layui.use('table', function() {
+		var $ = layui.jquery;
+		$('body').on('blur', '.list_order', function() {
+			var id = $(this).attr('data-id');
+			var listorder = $(this).val();
+			var loading = layer.load(1, {
+				shade: [0.1, '#fff']
+			});
+			$.post('{:url("cOrder")}', {
+				id: id,
+				listorder: listorder
+			}, function(res) {
+				layer.close(loading);
+				if(res.code === 1) {
+					layer.msg(res.msg, {
+						time: 1000,
+						icon: 1
+					}, function() {
+						window.location.reload();
+					});
+				} else {
+					layer.msg(res.msg, {
+						time: 1000,
+						icon: 2
+					});
+				}
+
+			})
+		});
+	});
+</script>

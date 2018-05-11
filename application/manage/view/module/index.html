@@ -1,0 +1,42 @@
+<div class="admin-main fadeInUp animated">
+	<div class="layui-field-box">
+		<div>
+			<blockquote class="layui-elem-quote">
+				<a data-url="{:url('add')}" data-title="{:lang('add')}{:lang('module')}" class="layui-btn additem">{:lang('add')}{:lang('module')}</a>
+			</blockquote>
+
+			<table class="layui-table" id="list" lay-filter="list">
+				<thead>
+					<tr>
+						<th>{:lang("id")}</th>
+						<th>{:lang("module")}{:lang("name")}</th>
+						<th>{:lang("table")}</th>
+						<th>{:lang("detail")}</th>
+						<th>{:lang("status")}</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{volist name="data" id="v"}
+					<tr>
+						<td>{$v.id}</td>
+						<td>{$v.title}</td>
+						<td>{$v.name}</td>
+						<td>{$v.description}</td>
+						<td class="layui-form"><input type="checkbox" name="status" value="{$v.id}" ajaxurl="{:URL('module/moduleState')}" lay-skin="switch" lay-text="开启|禁用" lay-filter="status" {eq name="$v.status" value="1" }checked{/eq}></div>
+		</td>
+		<td>
+			{eq name="$v.type" value="0"}
+			<a href="{:url('module/field',array('id'=>$v.id))}" class="layui-btn layui-btn-normal layui-btn-xs">模型字段</a>
+			{/eq}
+			<a href="{:url('module/add',array('id'=>$v.id))}" class="layui-btn layui-btn-xs">{:lang('edit')}</a>
+			<a class="layui-btn layui-btn-danger layui-btn-xs deleteitem" data-url="{:URL('module/del')}" id="{$v.id}">{:lang('del')}</a>
+
+		</td>
+		</tr>
+		{/volist}
+		</tbody>
+
+		</table>
+	</div>
+</div>

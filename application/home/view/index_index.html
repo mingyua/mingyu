@@ -1,0 +1,47 @@
+{include file="common/head"/}
+<section class="topnav">
+     <div class="container">
+      <div class="wp">
+      <div class="l">您好，欢迎来到Mingyu！</div>
+      <div class="r"><span class="r_nav">[ <a rel="nofollow" href="javascript:login();">登录</a> ]</span><span class="pipe">|</span><span class="r_nav">[ <a href="javascript:register();" rel="nofollow">注册</a> ]</span><span class="pipe">|</span><span class="r_nav"><a title="收藏本站" href="javascript:;" onClick="addFavoritepage('Mingyu前端框架','http://www.mingyu.com/');">收藏本站</a></span><span class="pipe">|</span><span class="r_nav"><a href="javascript:void(0)" onclick="setHome(this);" title="设为首页">设为首页</a></span></div>
+      </div>
+    </div>	
+</section>
+<header>
+<ul class="layui-nav nav-bg-white container">
+  <li class="logo"><img src="{$site.SITELOGO}"/></li>	
+  <li class="layui-nav-item"><a href="">藏青导航</a></li>
+  <li class="layui-nav-item"><a href="">产品</a></li>
+  <li class="layui-nav-item"><a href="">大数据</a></li>
+  <li class="layui-nav-item">
+    <a href="javascript:;">解决方案</a>
+    <dl class="layui-nav-child">
+      <dd><a href="">移动模块</a></dd>
+      <dd><a href="">后台模版</a></dd>
+      <dd><a href="">电商平台</a></dd>
+    </dl>
+  </li>
+  <li class="layui-nav-item"><a href="">社区</a></li>
+</ul>	
+</header>
+<div class="layui-carousel" id="test10">
+  <div carousel-item="">
+    <div><img src="/static/home/images/slide/1.jpg"></div>
+    <div><img src="/static/home/images/slide/2.jpg"></div>
+    <div><img src="/static/home/images/slide/3.jpg"></div>
+    <div><img src="/static/home/images/slide/4.jpg"></div>
+    <div><img src="/static/home/images/slide/5.jpg"></div>
+    <div><img src="/static/home/images/slide/6.jpg"></div>
+  </div>
+</div>
+<section id="itembox">
+	<div class="container">
+		<div class="layui-row">
+			<div class="layui-col-sm3 text-center"><i class="layui-icon" style="font-size: 30px; color: #1E9FFF;">&#xe68e;</i> </div>
+			<div class="layui-col-sm3 text-center">65+65</div>
+			<div class="layui-col-sm3 text-center">54654</div>
+			<div class="layui-col-sm3 text-center">54654</div>
+		</div>
+	</div>
+</section>
+{include file="common/footer"/}

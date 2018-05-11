@@ -1,0 +1,46 @@
+.conrcdr{ width:1200px; height:auto; margin:0 auto; padding-top:30px;}
+
+@media(max-width:1024px){
+.conrcdr{ width:90%; overflow:hidden; height:auto; margin:0 auto; padding-top:60px;}	
+}
+
+.body-wrap {width: 100%;position: relative;transition: all 0.5s ease 0s;z-index: 1;}
+
+.i-ban {position: relative;overflow: hidden;width: 100%;z-index: 1;height: 800px;}
+.i-ban ul, .i-ban li {width: 100%;height: 100%;}
+.i-ban li {background-size: cover !important;position: absolute;left: 100%;top: 0;overflow: hidden;}
+.i-ban li .cent-cont {position: absolute;left:0%;top:35%; margin-top: -240px; color: #fff; z-index: 3; width:100%;}
+.i-ban li .word {color: #fff;font-size: 50px;line-height: 68px;}
+.i-ban li .word p {position: relative;overflow: hidden;height: auto;}
+.i-ban li .word p img{ display:block; margin:0 auto;}
+.i-ban li .word p .font-sign {position: relative;display: block;top: 20px; opacity: 0;filter: alpha(opacity=0);}
+.i-ban li.active .word p .font-sign {top: 0;opacity: 1;filter: alpha(opacity=100); animation:swing 2s;-mzoanimation:swing 2s;-webkit-animation:swing 2s;-o-animation:swing 2s}
+.i-ban li .word .font {display: block;position: relative;top: 20px;opacity: 0; filter: alpha(opacity=0);}
+.i-ban li .word p .font-sign1{position: relative;display: block;top: 20px; opacity: 0;filter: alpha(opacity=0);font-size:32px; line-height:48px;}
+.i-ban li.active .word p .font-sign1{top: 0;opacity: 1;filter: alpha(opacity=100); animation:fadeInLeft 2s;-mzoanimation:fadeInLeft 2s;-webkit-animation:fadeInLeft 2s;-o-animation:fadeInLeft 2s}
+
+.i-ban li .word p .font-sign2{position: relative;display: block;top: 20px; opacity: 0;filter: alpha(opacity=0); color:#fff; font-size:16px; line-height:48px;}
+.i-ban li.active .word p .font-sign2{top: 0;opacity: 1;filter: alpha(opacity=100); animation:fadeInRight 2s;-mzoanimation:fadeInRight 2s;-webkit-animation:fadeInRight 2s;-o-animation:fadeInRight 2s}
+
+.i-ban li .word p .font-sign3{position: relative;display: block;top: 20px; opacity: 0;filter: alpha(opacity=0);}
+.i-ban li .word p .font-sign3 a{ display:block; width:138px; height:30px; background:#ffffff; text-align:center; line-height:30px; color:#2890f4; font-size:14px;}
+
+.i-ban li.active .word p .font-sign3{top: 0;opacity: 1;filter: alpha(opacity=100); animation:fadeInUp 2s;-mzoanimation:fadeInUp 2s;-webkit-animation:fadeInUp 2s;-o-animation:fadeInUp 2s}
+
+
+
+.i-m-ban .word {color: #fff;font-size: 30px;line-height: auto;}
+.i-m-ban .word p {position: relative; overflow: hidden;height: auto;}
+.i-m-ban .word p .font-sign {position: relative;display: block;top: 20px; opacity: 0;filter: alpha(opacity=0);}
+.i-m-ban .word span.line {display: block;height: 4px;background-color: #fff;opacity: 0.7;filter: alpha(opacity=70);width: 0;position: absolute;left: 0;top: 50%;margin-top: -2px;}
+
+.i-m-ban .word .font {display: block;position: relative;top: 20px;opacity: 0;filter: alpha(opacity=0);}
+
+
+
+.i-ban .btns {position: absolute;bottom:76px;left: 10.5%;z-index: 10;width:80px;height:20px; overflow:hidden;}
+.i-ban .btns span {display: inline-block;width:10px;height:10px;margin-right: 5px;background-color: #fff;position: relative;cursor: pointer; border-radius:100px;}
+.i-ban .btns span i {display: none; height: 100%;position: absolute;width: 0;background-color: #ce0000; border-radius:100px;}
+@media(max-width:1024px){
+.i-ban li .word p img{ display:block; margin:0 auto; width:70%; margin-top:120px;}	
+}

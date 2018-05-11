@@ -1,0 +1,105 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>{$cate.catname}列表</h5>
+
+					<div class="ibox-tools">
+						<a class="collapse-link">
+							<i class="fa fa-chevron-up"></i>
+						</a>
+
+						<a class="close-link">
+							<i class="fa fa-times"></i>
+						</a>
+					</div>
+				</div>
+				<div class="ibox-content">
+					<form class="layui-form serch" action="{:url('article/index',array('catid'=>$cate.id))}" method="post">
+						<div class="layui-form-item" style="float: left;">
+							<div class="layui-input-inline">
+								<input type="text" name="keywords" lay-verify="title" autocomplete="off" placeholder="请输入关键词" class="layui-input layui-btn-sm">
+							</div>
+							<div class="layui-input-inline">
+								<div class="layui-inline">
+									<select name="cate_id" lay-search="">
+										<option value="">分类</option>
+										{volist name="category" id="v"}
+										<option value="{$v.id}" >{$v.str}{$v.catname}</option>
+										{/volist}
+									</select>
+								</div>
+							</div>
+							<div class="layui-input-inline">
+								<div class="layui-inline">
+									<select name="status">
+										<option value="">状态</option>
+										<option value="0">待发布</option>
+										<option value="1">发布</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="layui-input-inline">
+								<div class="layui-inline">
+									<div class="layui-input-inline">
+										<input type="text" class="layui-input" id="create_time" placeholder="创建时间" name="create_time">
+									</div>
+								</div>
+							</div>
+							<button class="layui-btn layui-btn-danger " lay-submit="" lay-filter="serch">立即提交</button>
+							<a data-url="{:url('article/publish',array('cat'=>$cate.module))}" class="layui-btn  a_menu additem" >
+								添加文章
+							</a>
+						</div>
+					</form>
+
+					</fieldset>
+					<table class="layui-table" lay-even="" lay-skin="row" lay-size="sm">
+						<colgroup>
+							<col width="50">
+							<col width="300">
+							<col width="50">
+							<col width="100">
+							<col width="100">
+							<col width="100">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>标题</th>
+								<th>分类</th>
+								<th>创建人</th>
+								<th>创建时间</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody id="tipimg">
+							{empty name="$list"}
+							<tr><td colspan="6" class="text-center red layui-text "><span class="f-20 pt-10 pb-10">没有数据！</span></td></tr>
+							{else/}
+							{volist name="list" id="vo"}
+							<tr>
+								<td>{$vo.id}</td>
+								<td><a style="{$vo.title_style}">{$vo.title}</a>{notempty name="$vo.thumb"}<img alt="__PUBLIC__{$vo.thumb}" src="__ADMIN__/images/image.gif" width="20" height="20">{/notempty}</td>
+								<td>{$vo.catid|catname}</td>
+								<td>{$vo.username}</td>
+								<td>{$vo.createtime|toDate}</td>
+								<td class="operation-menu">
+									<a data-url="{:url('article/publish',array('id'=>$vo.id))}" class="layui-btn layui-btn-xs a_menu additem" style="margin-right: 0;font-size:12px;">修改</a>
+									<a data-url="{:url('article/delete')}" class="layui-btn layui-btn-xs layui-btn-danger deleteitem" id="{$vo.id}" style="margin-right: 0;font-size:12px;">删除</a>
+								</td>
+							</tr>
+							{/volist}							
+							{/empty}
+
+						</tbody>
+						<div id="enlarge_images"></div>
+					</table>
+					<div class="pagination">{$list->render()}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

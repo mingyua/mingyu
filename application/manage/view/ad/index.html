@@ -1,0 +1,60 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="ibox float-e-margins">
+
+				<div class="ibox-content">
+					<blockquote class="layui-elem-quote pb-5">
+						<div class="layui-btn-container ">
+							<button class="layui-btn layui-btn-danger bold" ajaxurl="{:URL('delall')}" lay-submit lay-filter="delall">批量删除</button> 
+							<button class="layui-btn additem bold" style="float: right;"  data-url="{:URL('ad/add')}">添加广告</button>
+						</div>
+
+					</blockquote>
+					<table class="layui-table" lay-even="" lay-skin="row" lay-size="sm">
+						<thead>
+							<tr class="layui-bg-gray">
+								<th width="20"><div class="layui-form"><input type="checkbox" name="allck[]"  title="" lay-filter="allck" lay-skin="primary"></div> </th>
+								<th>编号</th>
+								<th>广告名称</th>
+								<th>所属位置</th>
+								<th>添加时间</th>
+								<th>排序</th>
+								<th width="100">状态</th>
+								<th width="100">操作</th>
+							</tr>
+						</thead>
+						<tbody id="tipimg">
+							
+							{empty name="$list"}
+							<tr><td colspan="6" class="text-center red layui-text "><span class="f-20 pt-10 pb-10">没有数据！</span></td></tr>
+							{else/}
+							{volist name="list" id="vo"}
+							<tr>
+								<td><div class="layui-form"><input type="checkbox"  name="allck" value="{$vo.id}"  lay-skin="primary"></div></td>
+								<td>{$vo.id}</td>
+								<td> {$vo.title}{notempty name="$vo.image"}<img alt="__ROOT__{$vo.image}" src="__MANAGE__/images/image.gif" width="20" height="20">{/notempty}</td>
+								<td>{$vo.kinds,$md,'kinds'|kinds}</td>
+								<td>{$vo.addtime|toDate}</td>
+								<td>{$vo.sort}</td>
+
+								<td  class="layui-form"><input type="checkbox" name="status" value="{$vo.id}" lay-skin="switch"  ajaxurl="{:URL('ad/status')}" lay-text="开启|关闭" lay-filter="status" {eq name="$vo.status" value="1"}checked{/eq}></div></td>
+								<td class="operation-menu">
+									<a data-url="{:url('ad/add',array('id'=>$vo.id))}" class="layui-btn layui-btn-xs a_menu additem" style="margin-right: 0;font-size:12px;">修改</a>
+									<a data-url="{:url('ad/del')}" class="layui-btn layui-btn-xs layui-btn-danger deleteitem" id="{$vo.id}" style="margin-right: 0;font-size:12px;">删除</a>
+								</td>
+							</tr>
+							{/volist}							
+							{/empty}
+
+						</tbody>
+						<div id="enlarge_images"></div>
+					</table>
+					{notempty name="$list"}
+					<div class="pagination">{$list->render()}</div>
+					{/notempty}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

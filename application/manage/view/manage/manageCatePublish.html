@@ -1,0 +1,91 @@
+<link rel="stylesheet" href="__ZTREE__/metroStyle/metroStyle.css" type="text/css">
+<div class="admin-main fadeInUp animated">
+	<div class="layui-field-box">
+		<div>
+
+			<form class="layui-form layui-form-pane">
+				<div class="layui-form-item">
+					<label class="layui-form-label">角色名</label>
+					<div class="layui-input-inline">
+						<input name="name" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" type="text" value="{$permissions.name}">
+					</div>
+				</div>
+
+				<input type="hidden" id="ztreeids" name="permissions" />
+				<input type="hidden" id="ztreesnames" />
+				<input type="hidden" name="id" value="{$permissions.id|default='0'}" />
+				<div class="zTreeDemoBackground left">
+					<ul id="treeDemo" class="ztree"></ul>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">备注</label>
+					<div class="layui-input-block" style="max-width:500px;">
+						<textarea placeholder="请输入内容" class="layui-textarea" name="desc">{$permissions.desc}</textarea>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<a class="layui-btn" lay-submit lay-filter="senddata" ajaxurl="{:URL('manage/manageCatePublish')}">立即提交</a>
+						<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+<SCRIPT type="text/javascript">
+	var setting = {
+		check: {
+			enable: true
+		},
+		view: {
+			showIcon: false
+		},
+		callback: {
+			onCheck: onCheck
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		}
+	};
+
+	var zNodes = {$menus};
+
+	function filter(node) { //过滤器直选中2级节点累加  
+		return((node.level == 0 || node.level == 1 || node.level == 2) && node.checked == true);
+	}
+
+	function onCheck(e, treeId, treeNode) { //这是将所有选中节点的名字 用,分割做拼接 用于持久化到数据库  
+		var zTree = $.fn.zTree.getZTreeObj("treeDemo").getNodesByFilter(filter);
+		var choose = "";
+		for(var i = 0; i < zTree.length; i++) {
+			if(zTree[i].name != null)
+				choose += (i == (zTree.length - 1)) ? zTree[i].name : zTree[i].name + ",";
+		}
+		$("#ztreesnames").val(choose);
+		treeIds();
+	}
+
+	function treeIds() { //这是将选中的节点的id用;分割拼接起来,用于持久化到数据库  
+		var zTreeO = $.fn.zTree.getZTreeObj("treeDemo").getNodesByFilter(filter);
+		var idListStr = "";
+		for(var i = 0; i < zTreeO.length; i++) {
+			if(zTreeO[i].id != null) {
+				idListStr += (i == (zTreeO.length - 1)) ? zTreeO[i].id : zTreeO[i].id + ",";
+			}
+		};
+		$("#ztreeids").val(idListStr);
+	};
+
+	$(document).ready(function() {
+		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+		$("#ztreeids").val('{$permissions.permissions}');
+	});
+</SCRIPT>
+
+<script type="text/javascript" src="__ZTREE__/jquery.ztree.core.min.js"></script>
+<script type="text/javascript" src="__ZTREE__/jquery.ztree.excheck.min.js"></script>

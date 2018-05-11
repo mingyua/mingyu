@@ -1,0 +1,54 @@
+{include file="common/head"/}
+<!-- pagetitle start here -->
+<section id="pagetitle-wrapper">
+    <div class="pagetitle-content">
+        <h2>{$info.title}</h2>
+    </div>
+</section>
+<!-- pagetitle end here -->
+<!-- breadcrumb start here -->
+<section id="breadcrumb-wrapper">
+    <div id="breadcrumb-content">
+        <ul>
+            <li><a href="{:url('home/index/index')}" title="CLTPHP">首页</a></li>
+            <li><a href="{:url('home/'.MODULE_NAME.'/index',array('catId'=>input('catId')))}" title="{$title}">{$title}</a></li>
+            <li>{$info.title}</li>
+        </ul>
+    </div>
+</section>
+<!-- breadcrumb end here -->
+<!-- maincontent start here -->
+<section id="content-wrapper">
+    <div class="row">
+        <div class="eight columns">
+            <!-- blog post 1 -->
+            <div class="blog-post">
+                <img src="__HOME__/images/sample-images/blog-post1.jpg" alt="blog-img" />
+                <div class="row">
+                    <div class="columns">
+                        {$info.content}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="four columns">
+            <aside>
+                <h5>推荐文章</h5>
+                <ul class="popular-list">
+                    {volist name="$list" id="vo"}
+                    <li>
+                        <img src="{$vo.title_thumb}" alt="" class="img-border" />
+                        <p class="popular-title">
+                            <a href="{:url('home/'.$vo['controller'].'/info',array('id'=>$vo['id'],'catId'=>$vo['catid']))}" style="{$vo.title_color};{$vo.title_weight}" title="{$vo.title}">{$vo.title}</a>
+                        </p>
+                        <p class="comment-count"><a href="single.html">{$vo.hits}</a></p>
+                        <p class="author-name">{$vo.username}</p>
+                    </li>
+                    {/volist}
+                </ul>
+            </aside>
+        </div>
+    </div>
+</section>
+<!-- maincontent end here -->
+{include file="common/footer"/}

@@ -1,0 +1,74 @@
+<div class="admin-main fadeInUp animated">
+	<div class="layui-field-box">
+		<div>
+			<form class="layui-form serch" action="{:url('manage/log')}" method="get">
+				<div class="layui-form-item">
+					<div class="layui-input-inline">
+						<div class="layui-inline">
+							<select name="manage_menu_id" lay-search="">
+								<option value="">操作</option>
+								{volist name="$info.menu" id="vo"}
+								<option value="{$vo.id}">{$vo.name}</option>
+								{/volist}
+							</select>
+						</div>
+					</div>
+					<div class="layui-input-inline">
+						<div class="layui-inline">
+							<select name="manage_id" lay-search="">
+								<option value="">操作人</option>
+								{volist name="$info.manage" id="vo"}
+								<option value="{$vo.id}">{$vo.nickname}</option>
+								{/volist}
+							</select>
+						</div>
+					</div>
+					<div class="layui-input-inline">
+						<div class="layui-inline">
+							<div class="layui-input-inline">
+								<input type="text" class="layui-input" id="create_time" placeholder="操作时间" name="create_time">
+							</div>
+						</div>
+					</div>
+					<button class="layui-btn" lay-submit="" lay-filter="serch">立即提交</button>
+				</div>
+			</form>
+
+			<table class="layui-table" lay-even="" lay-skin="row" lay-size="sm">
+
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>操作</th>
+						<th>路径</th>
+						<th>节点备注</th>
+						<th>返回对象</th>
+						<th>操作者</th>
+						<th>记录时间</th>
+						<th>记录IP</th>
+					</tr>
+				</thead>
+				<tbody>
+					{volist name="log" id="vo"}
+					<tr>
+						<td>{$vo.id}</td>
+						<td>{empty name="$vo.name"}{$vo.menu.name}{else /}{$vo.name}{/empty}</td>
+						<td>{$vo.menu.module}/{$vo.menu.controller}/{$vo.menu.function}{notempty name="$vo.menu.parameter"}/{$vo.menu.parameter}{/notempty}</td>
+						<td>{notempty name="$vo.menu.description"}{$vo.menu.description}{/notempty}</td>
+						<td>{notempty name="$vo.operation_id"}{$vo.operation_id}{else /}无{/notempty}</td>
+						<td>{$vo.manage.nickname}
+							<{volist name="admin_cate" id="cate" }{eq name="$vo.manage.manage_cate_id" value="$cate.id" }{$cate.name}{/eq}{/volist}>
+						</td>
+						<td>{$vo.create_time}</td>
+						<td>{$vo.ip}</td>
+					</tr>
+					{/volist}
+				</tbody>
+			</table>
+			<div class="pagination">{$log->render()}</div>
+			<div class="clearfix">
+
+			</div>
+		</div>
+	</div>
+</div>

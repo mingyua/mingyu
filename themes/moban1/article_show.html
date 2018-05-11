@@ -1,0 +1,34 @@
+{include file="common/head"/}
+
+ <!--main begin-->
+<div class="xw_box2">
+  <div class="container">
+    <div class="xw_bo_l">
+      <div class="xw_bo_lt">
+        <h1>{$info.title}</h1>
+        <p>{$info.addtime,'Y.m.d'|toDate} <i>{$info.catid|catname}</i></p>
+      </div>
+      <div class="xw_bo_lc">
+      {$info.content}
+      </div>
+      <div class="xw_bo_lb">
+      {$info.catid,$info.id|uppage}
+      {$info.catid,$info.id|downpage}
+      
+      </div>
+    </div>
+    <div class="xw_bo_r">
+      <div class="xw_bo_rt">最新资讯</div>
+      <div class="xw_bo_rb">
+        <ul>
+        	{clt:list db="article" where="catid=$catid" id="v" order="id DESC" limit="9"}
+			<li><a href="__ROOT__/news-{$v.catid}-{$v.id}.html">{$v.title}</a><p>{$v.addtime,'m月d日 H:i'|toDate}</p></li>
+			{/clt:list}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!--main end--> 
+
+{include file="common/footer"/}

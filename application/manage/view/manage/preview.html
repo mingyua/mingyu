@@ -1,0 +1,58 @@
+<div class="admin-main fadeInUp animated">
+	<div class="layui-field-box">
+		<div>
+			<blockquote class="layui-elem-quote">
+				<button class="layui-btn">查看权限</button>
+			</blockquote>
+			<div class="layui-form-item">
+				<div class="layui-collapse" lay-accordion="" style="width:500px;margin-left:20px;">
+					{volist name="$info.menu" id="data"} {notempty name="$data.list"}
+					<div class="layui-colla-item" style="">
+						<h2 class="layui-colla-title" style="background:0;">{$data.name}</h2>
+						<div class="layui-colla-content">
+							<table>
+								<tbody>
+									{eq name="data.type" value="1"}
+									<tr>
+										<td>
+											{$data.str}<input type="checkbox" lay-ignore lay-skin="primary" name="admin_menu_id[]" value="{$data.id}" {notempty name="$info.cate.permissions" }{volist name="$info.cate.permissions" id="datas" }{eq name="$datas" value="$data.id" }checked{/eq}{/volist}{/notempty}>{$data.name}
+										</td>
+									</tr>
+									{/eq} {volist name="$data.list" id="vo"}
+									<tr>
+										{eq name="vo.is_display" value="1"}
+										<td>
+											{$vo.str}<input type="checkbox" lay-ignore lay-skin="primary" name="admin_menu_id[]" value="{$vo.id}" {notempty name="$info.cate.permissions" }{volist name="$info.cate.permissions" id="datas" }{eq name="$datas" value="$vo.id" }checked {else /}{eq name="$vo.type" value="2" }checked disabled{/eq}{/eq}{/volist}{else /}{eq name="$vo.type" value="2" }checked disabled{/eq}{/notempty}>{$vo.name}
+										</td>
+										{else /}{eq name="vo.type" value="1"}
+										<td>
+											{$vo.str}<input type="checkbox" lay-ignore lay-skin="primary" name="admin_menu_id[]" value="{$vo.id}" {notempty name="$info.cate.permissions" }{volist name="$info.cate.permissions" id="datas" }{eq name="$datas" value="$vo.id" }checked {else /}{eq name="$vo.type" value="2" }checked disabled{/eq}{/eq}{/volist}{else /}{eq name="$vo.type" value="2" }checked disabled{/eq}{/notempty}>{$vo.name}
+										</td>
+										{/eq}{/eq}
+									</tr>
+									{/volist}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					{else /} {eq name="data.type" value="1"}
+					<div class="layui-colla-item" style="border:0;">
+						<h2 class="layui-colla-title" style="background:0;">{$data.name}</h2>
+						<div class="layui-colla-content">
+							<table>
+								<tbody>
+									<tr>
+										<td>
+											{$data.str}<input type="checkbox" lay-ignore lay-skin="primary" name="admin_menu_id[]" value="{$data.id}" {notempty name="$info.cate.permissions" }{volist name="$info.cate.permissions" id="datas" }{eq name="$datas" value="$data.id" }checked{/eq}{/volist}{/notempty}>{$data.name}
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					{/eq} {/notempty} {/volist}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

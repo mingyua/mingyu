@@ -1,0 +1,14 @@
+{
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
+    },
+    "require": {
+        "topthink/think-worker": "^1.0",
+        "workerman/workerman-for-win": "^3.5",
+        "workerman/phpsocket.io-for-win": "^1.1",
+        "topthink/think-captcha": "1.*"
+    }
+}

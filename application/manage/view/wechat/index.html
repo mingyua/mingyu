@@ -1,0 +1,47 @@
+<div class="admin-main fadeInUp animated">
+	<div class="layui-field-box">
+		<div>
+			<blockquote class="layui-elem-quote">
+				<button class="layui-btn">公众号管理</button>
+			</blockquote>
+			<form class="layui-form layui-form-pane">
+				<div class="layui-form-item">
+					<label class="layui-form-label">{:lang('AppID')}</label>
+					<div class="layui-input-block">
+						<input type="text" name="appid" lay-verify="required" placeholder="{:lang('pleaseEnter')}{:lang('AppID')}" value="{$wchat_config.appid}" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">{:lang('Appsecret')}</label>
+					<div class="layui-input-inline" style="width: 400px;">
+						<input type="text" name="appsecret" lay-verify="required" placeholder="{:lang('pleaseEnter')}{:lang('Appsecret')}" value="{$wchat_config.appsecret}" class="layui-input">
+					</div>
+					<div class="layui-form-mid layui-word-aux">
+						AppID以及Appsecret来自于您申请开发接口时提供的账号和密码。
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">URL</label>
+					<div class="layui-input-block">
+						<input class="layui-input" id="url" readonly value="{$call_back_url}">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">TOKEN</label>
+					<div class="layui-input-inline">
+						<input type="text" name="token" placeholder="输入TOKEN" class="layui-input" value="{$wchat_config.token}">
+					</div>
+					<div class="layui-form-mid layui-word-aux">
+						请将以上URL及Token填到微信公众平台中，以完成绑定。
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<a class="layui-btn" lay-submit lay-filter="senddata" ajaxurl="{:URL('wechat/setWechatConfig')}">立即提交</a>
+
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

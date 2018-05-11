@@ -1,0 +1,37 @@
+<div class="admin-main fadeInUp animated">
+	<div class="layui-field-box">
+		<div>
+			<blockquote class="layui-elem-quote">
+				<button class="layui-btn">分组配置列表</button>
+			</blockquote>
+			<table class="layui-table">
+				<thead>
+					<tr>
+						<th>标识</th>
+						<th>字段名称</th>
+						<th>标题</th>
+						<th>说明</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					{volist name="list" id="v"}
+					<tr>
+						<td>{$v.id}</td>
+						<td>{$v.name}</td>
+						<td>{$v.title}</td>
+						<td>{$v.remark}</td>
+						<td>
+							<div class="">
+								<button class="layui-btn layui-btn-xs  additem" data-url="{:URL('index/Systemadd',array('id'=>$v['id']))}" data-title="编辑">编辑</button>
+								<button class="layui-btn layui-btn-xs layui-btn-danger deleteitem" data-url="{:URL('index/del')}" id="{$v.id}">删除</button>
+							</div>
+						</td>
+					</tr>
+					{/volist}
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+</div>

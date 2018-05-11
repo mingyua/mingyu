@@ -1,0 +1,43 @@
+{include file="common/head"/}
+
+
+
+        <!--banner begin-->
+	<div class="gyw_bd"><img src="__ROOT__{$banner}" />
+	  <div class="gyw_bd1 dqzg1 dqzg12">
+	    <div class="container">{$cattitle.catname}<i>{$cattitle.title}</i></div>
+	  </div>
+	</div>
+
+	<!--banner end--> 
+
+	<!--main begin-->
+	<div class="xw_box xw_boxb1">
+	  <div class="container">
+	    <div class="xw_bot3 xw_box4">
+	      <ul>
+      	{clt:list db="category" where="parentid=$pid" id="v" order="listorder ASC" limit="4"}
+        <li><a href="__ROOT__/{$v.catdir}-{$v.id}.html" {eq name="$v.id" value="$catid"}class="bor"{/eq}>{$v.catname}</a></li>
+        {/clt:list}
+	      </ul>
+	    </div>
+	  </div>
+	  <div class="gyw_box rclij">
+	  <div class="container">
+	    <div class="gyw_bod gyw_bod_bj">
+	      <div class="gyw_bod_rc">
+	        <div class="gsjj">
+	          <div class="gsjj_t"><span>公司人才理念：  忠诚       专业       进取       廉洁</span></div>
+	          <div class="gsjj_b">
+	            <div style=\"text-align:center;\">
+	<img src=/Uploads/Editor/2017-10-09/59db32c820ba3.jpg /> <br />
+</div><br /><br />
+	          </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!--main end-->
+{include file="common/footer"/}

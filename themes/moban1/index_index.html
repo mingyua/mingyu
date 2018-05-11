@@ -1,0 +1,283 @@
+{include file="common/head"/}
+
+<div class="layui-carousel" id="slide">
+	<div carousel-item>
+		{volist name="slide" id="v"}
+		<div><a href="{$v.url}" target="_blank"><img src="__ROOT__{$v.image}"></a></div>
+		{/volist}
+	</div>
+</div>
+	<!--banner end-->
+	<!--main begin-->
+	<div class="box1">
+		<div class="container">
+			{clt:info db='page' id='info' where="catid = 2"}
+			<div class="gy_bod"><i>{$info.entitle}</i><img src="/public/themes/Home/images/tu1.jpg" />{$info.title}<img src="/public/themes/Home/images/tu1.jpg" /></div>
+			<div class="gy_bod1">
+				{$info.content}
+			</div>
+			<div class="gy_bod2"><img src="{$info.thumb}" /></div>
+			{/clt:info}
+			<div class="gy_bod3">
+				<ul>
+					{clt:list db="category" order="listorder ASC" id="list" where="parentid=2" limit="1,4"}
+					<li>
+						<h1><a href="__ROOT__/{$list.catdir}-{$list.id}.html">{$list.catname}</a></h1>
+
+						<p>
+							<a href="__ROOT__/{$list.catdir}-{$list.id}.html"><img src="/public/themes/Home/images/tu3.jpg" /></a>
+						</p>
+					</li>
+					{/clt:list}
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="box2">
+		<div class="container">
+			<div class="gy_bod"><i>NEWS CENTER</i><img src="/public/themes/Home/images/tu1.jpg" />新闻中心<img src="/public/themes/Home/images/tu1.jpg" /></div>
+			<div class="xw_bod">
+				<div class="tab2">
+					<ul class="menu">
+						
+						{volist name="newlist" id="v"}
+						<li {eq name="$key" value="3"}class="qcbj"{/eq}>
+							<a onClick="a1j({$key+1},4)" id="a1v{$key+1}" href="javascript:void(0)" {eq name="$key" value="0"}class="dada"{else/}class="xiao"{/eq}>{$v.catname}</a>
+						</li>
+						{/volist}
+					</ul>
+					{volist name="newlist" id="v"}
+					<div class="con{$key+1}" id="n1v{$key+1}" {neq name="$key" value="0"}style=" display:none;"{/neq} >
+						<div class="xw_bod1">
+							{notempty name="v.arr"}
+							{volist name="v.arr" id="k"}
+							<dl {eq name="$key" value="3"}class="qcbj"{/eq}>
+								<dt><img src="__ROOT__{$k.thumb}" /></dt>
+								<dd>
+									<h1><a href="__ROOT__/{$k.catid,'catdir'|catname}-{$k.catid}-{$k.id}.html">{$k.title}</a></h1>
+									<div>
+										<p>{$k.keywords}</p>
+									</div>
+									<p>
+										<a href="__ROOT__/{$k.catid,'catdir'|catname}-{$k.catid}-{$k.id}.html">查看更多></a>
+									</p>
+								</dd>
+							</dl>
+							{/volist}
+							{/notempty}
+
+						</div>
+						<div class="gdin">
+							<a href="__ROOT__/new.html">查看更多</a>
+						</div>
+					</div>
+					{/volist}
+					
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="box3">
+		<div class="cp_bod">
+			<div class="cp_bod_t">文化创意产业园区开发建设与运营管理新模式</div>
+			<div class="cp_bod_b"><img src="/public/themes/Home/images/tu.png" /></div>
+		</div>
+		<div class="cp_bod1">
+			<div class="cp_bod1_t">
+				<a href="/Home/Article/lists/category/43.html"><i>product service</i>产品服务</a>
+			</div>
+			<div class="cp_bod1_c">
+
+				<p>文化置业以“坚持文化市场导向，聚焦文化产业需求，助力文化企业发展，推动文化产业升级”为使命，坚持“立足北京,深耕京津冀,辐射全中国”战略构想，着力打造 “文化创意产业园区开发建设与运营管理新模式”，立足北京文创产业功能区建设，以文创园区开发、文创平台建设、文创产业投资、文创资产运营为重点，优选项目，科学布局，着力构建“整体解决方案提供、开发建设、持有运营”的三位一体发展模式；打造精品文创园区和文创产业地标，塑造品牌，将业务领域进一步拓展到津冀及全国范围；努力实现社会效益与经济效益双丰收。</p>
+			</div>
+			<div class="cp_bod1_b">
+				<ul>
+					<li><img src="/public/themes/Home/images/tu8.jpg" /></li>
+					<li><img src="/public/themes/Home/images/tu9.jpg" /></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="box4">
+		<div class="container">
+			<div class="gy_bod"><i>purchasing platform</i><img src="/public/themes/Home/images/tu1.jpg" />采购平台<img src="/public/themes/Home/images/tu1.jpg" /></div>
+			<div class="cg_bod">
+				<div class="cg_bod_l">
+					<div class="cg_bod_lt">
+						<a href="/Home/Article/detail/id/26.html">
+							<img src="/public/themes/Home/Picture/2017-08-11/598d3f28a6938.jpg" /></a>
+					</div>
+					<div class="cg_bod_lb">
+						<ul>
+
+							<li>
+								<a href="/Home/Article/detail/id/75.html">
+									<span class="zb">招标</span> 前门项目备选方案设计招标
+								</a>
+								<font>2017.01.24</font>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="cg_bod_r">
+
+					<dl>
+						<dt><a href="/Home/Article/detail/id/75.html">
+            <img src="/public/themes/Home/Picture/2017-08-11/598d06b2edeff.jpg" /></a>
+          </dt>
+						<dd>
+							<h6><a href="/Home/Article/detail/id/75.html">前门项目备选方案设计招标</a></h6>
+							<div>
+								<p>前门项目备选方案设计招标</p>
+							</div>
+							<p><span>开始时间：<i>2017.01.24  12时00分</i></span><span>联系人：<i></i></span></p>
+						</dd>
+					</dl>
+					<dl>
+						<dt><a href="/Home/Article/detail/id/27.html">
+            <img src="/public/themes/Home/Picture/2017-08-11/598d063669184.jpg" /></a>
+          </dt>
+						<dd>
+							<h6><a href="/Home/Article/detail/id/27.html">文化置业公司 办公区机房弱电设备设计、安装与调试工程招标</a></h6>
+							<div>
+								<p>文化置业公司 办公区机房弱电设备设计、安装与调试工程招标</p>
+							</div>
+							<p><span>开始时间：<i>2017.01.24  12时00分</i></span><span>联系人：<i>詹琪</i></span></p>
+						</dd>
+					</dl>
+					<div class="cg_bod_rb">
+						<p><span>监督举报</span>&nbsp;&nbsp;&nbsp;&nbsp;举报电话：010-68960700-843&nbsp;&nbsp;&nbsp;&nbsp;通信地址：北京市海淀区厂洼中街66号英泰科技大厦二层</p>
+					</div>
+
+				</div>
+			</div>
+			<div class="gdin">
+				<a href="/Home/Article/lists/category/44.html">查看更多</a>
+			</div>
+		</div>
+	</div>
+	<div class="box5">
+		<div class="container">
+			<div class="gy_bod"><i>MASS WORK</i><img src="/public/themes/Home/images/tu1.jpg" />党群工作<img src="/public/themes/Home/images/tu1.jpg" /></div>
+			<div class="dq_bod">
+				<div class="tab3">
+					<ul class="menu">
+						<li class="active">
+							<a onClick="a2j(1,2)" id="a2v1" class="dada1" href="javascript:void(0)">党群工作</a>
+						</li>
+						<li class="qcbj">
+							<a onClick="a2j(2,2)" id="a2v2" class="xiao1" href="javascript:void(0)">职工之家</a>
+						</li>
+					</ul>
+
+					<div class="con6" id="n2v1">
+						<div class="dq_bod">
+							<div class="dq_bod_l">
+
+								<dl>
+									<dt><a href="/Home/Article/detail/id/130.html">
+                <img src="/public/themes/Home/Picture/2017-08-23/599d3dd7380c3.jpg" /></a></dt>
+									<dd>
+										<h6><a href="/Home/Article/detail/id/130.html">文化置业党支部 举行迎“七一”主题党日活动</a></h6>
+										<p>2017年6月26日，北京市文化置业有限公司党支部举行迎“七一”主题党日活动，公司全体党员参加了活动</p>
+									</dd>
+								</dl>
+							</div>
+							<div class="dq_bod_r">
+								<ul>
+
+									<li><span><i>23</i>2017-08</span>
+										<font>
+											<h6><a href="/Home/Article/detail/id/130.html">文化置业党支部 举行迎“七一”主题党日活动</a></h6>
+											<p>2017年6月26日，北京市文化置业有限公司党支部举行迎“七一”主题党日活动，公司全体党员参加了活动</p>
+										</font>
+									</li>
+									<li><span><i>27</i>2017-05</span>
+										<font>
+											<h6><a href="/Home/Article/detail/id/129.html">北京市文化置业有限公司 组织党员参观京西山区中共第一党支部</a></h6>
+											<p>为深化和巩固“两学一做”学习教育成果，5月27日，文化置业公司党支部组织全体党员参观了京西山区中共第一党支部纪念馆，党支部书记张秀丽在纪念馆现场为全体党员讲授了“如何建设学习型党组织”的生动党课。</p>
+										</font>
+									</li>
+									<li><span><i>27</i>2017-04</span>
+										<font>
+											<h6><a href="/Home/Article/detail/id/128.html">文化置业公司 召开2017年党风廉政建设工作会议</a></h6>
+											<p>4月26日下午，北京市文化置业有限公司组织召开2017年党风廉政建设工作会议，文投集团纪委书记刘丽平出席并讲话，文化置业党支部书记张秀丽作党风廉政建设工作报告，会议由文化置业董事长石亚东主持。</p>
+										</font>
+									</li>
+									<li><span><i>02</i>2017-03</span>
+										<font>
+											<h6><a href="/Home/Article/detail/id/127.html">北京市文化置业有限公司 召开党支部民主评议会</a></h6>
+											<p>按照集团党委相关要求，2017年3月3日上午，文化置业党支部组织全体党员召开了专题组织生活会和开展民主评议党员工作。为确保此项工作的顺利开展，文化置业党支部高度重视，专门召开支委会研究，制定了方案，做好安排部署。</p>
+										</font>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="gdin">
+							<a href="/Home/Article/lists/category/45/id/60.html">查看更多</a>
+						</div>
+					</div>
+
+					<div class="con7" id="n2v2" s style=" display:none;">
+						<div class="dq_bod">
+							<div class="dq_bod_l">
+							</div>
+							<div class="dq_bod_r">
+								<ul>
+								</ul>
+							</div>
+						</div>
+						<div class="gdin">
+							<a href="/Home/Article/lists/category/45/id/61.html">查看更多</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="box6">
+		<div class="container">
+			<div class="gy_bod"><i>JOIN US</i><img src="/public/themes/Home/images/tu1.jpg" />加入我们<img src="/public/themes/Home/images/tu1.jpg" /></div>
+			<div class="jr_bod">
+				<h1>诚邀您加入文化置业温暖的大家庭</h1>
+				<p>严格按照"公开、公平、公正、透明"的原则面向社会公开招聘</p>
+				<p>招收优秀应届毕业生</p>
+			</div>
+			<div class="jr_bod1">
+				<ul>
+					<li>
+						<a href="/Home/Article/index/category/46/id/62.html">
+							<img src="/public/themes/Home/images/tu14.jpg" />人才理念</a>
+					</li>
+					<li>
+						<a href="/Home/Article/index/category/46/id/63.html">
+							<img src="/public/themes/Home/images/tu15.jpg" />人才招聘</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div >546546546</div>
+	<!--main end-->
+	<script>
+		layui.use(['carousel','layer'], function() {
+			var carousel = layui.carousel;
+			var layer = layui.layer;
+			//建造实例
+			carousel.render({
+				elem: '#slide',
+				width: '100%', //设置容器宽度
+				height: window.innerHeight-80, //设置容器宽度
+				arrow: 'always', //始终显示箭头
+				anim: 'fade', //切换动画方式					,
+				full: false,
+
+			});
+			
+		});
+		
+		 
+	</script>
+
+	{include file="common/footer"/}
