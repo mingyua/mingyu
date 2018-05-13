@@ -1,0 +1,9 @@
+##ignore this file
+/target/
+*.txt
+.project
+*.json
+*.lock
+.htaccess
+think
+/runtime/
