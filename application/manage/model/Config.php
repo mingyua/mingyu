@@ -4,7 +4,7 @@ namespace app\manage\model;
 use think\Model;
 
 class Config extends Model{
-     protected $table = 'Config';
+     protected $name = 'Config';
      protected $pk = 'id';
      
      
